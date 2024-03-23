@@ -6,7 +6,7 @@ import {AiOutlineSearch} from "react-icons/ai"
 function Header() {
     const path = useLocation().pathname
   return (
-   <Navbar className="border-b-2 items-center">
+   <Navbar className="border-b-2 sticky top-0 z-50 items-center">
 <Link to="/" className="self-center flex items-center gap-2 font-medium whitespace-nowrap">
     {/* <span className="px-2 md:py-2 py-1   bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 rounded-lg text-white">Kalibe`s </span> <span> Blog</span> */}
   <img src="./icon.jpg" className="md:w-12 md:h-12 w-10 h-10" alt="" />
