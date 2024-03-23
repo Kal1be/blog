@@ -15,9 +15,9 @@ function Header() {
    </h2>
     </Link>
     <form>
-        <TextInput type="text" placeholder="search" rightIcon={AiOutlineSearch} className="hidden md:inline"/>
+        <TextInput type="text" placeholder="search" rightIcon={AiOutlineSearch} className="hidden lg:inline"/>
     </form>
-        <Button className="w-12 h-10 md:hidden outline-none " pill  color="gray">
+        <Button className="w-12 h-10 lg:hidden outline-none " pill  color="gray">
 <AiOutlineSearch/>
        </Button>
         <div className="flex md:gap-3 gap-2 items-center md:order-2">
