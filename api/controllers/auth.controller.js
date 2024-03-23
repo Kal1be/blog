@@ -41,7 +41,7 @@ try {
     const validUser = await User.findOne({email})
 
     if(!validUser){
-    return  next(errorHandler(404,"user not found "))
+    return  next(errorHandler(404,"email or password is incorrect "))
     }
 
     const checkPassword = await bcrypt.compare(password,validUser.password)
