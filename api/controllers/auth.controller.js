@@ -1,5 +1,6 @@
 const User = require("../model/user.model")
 const jwt = require("jsonwebtoken")
+const errorHandler = require("../utils/error")
 const bcrypt = require("bcryptjs")
 
 
@@ -10,8 +11,7 @@ const signup = async (req,res,next)=>{
     const {username,email,password} = req.body
 
     if(!username || !email || !password || username==="" || email ===""||password===""){
-        res.status(400)
-       throw new Error("all fields are mandatory !")
+       next(errorHandler(400,"All fields are mandatory !")) 
     }
 const hasPassword = await bcrypt.hash(password,12)
    const newUser = new User({username,email,password:hasPassword})
@@ -34,24 +34,20 @@ const signin = async (req,res,next)=>{
     const {email,password} = req.body
 
     if(!email || !password){
-        res.status(400)
-        throw new Error("All fields are mandatory !")
+        next(errorHandler(400,"All fields are mandatory !")) 
     }
 try {
     
     const validUser = await User.findOne({email})
 
     if(!validUser){
-        res.status(404)
-
-        throw new Error("user not found !")
+    return  next(errorHandler(404,"user not found "))
     }
 
     const checkPassword = await bcrypt.compare(password,validUser.password)
 
     if(!checkPassword){
-        res.status(400)
-        throw new Error("email or password is incorrect !")
+    return next(errorHandler(400,"email or password is incorrect !"))
     }
 
     const token = jwt.sign({id:validUser._id},process.env.ACCESS_TOKEN,{expiresIn:"100h"})

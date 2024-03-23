@@ -28,7 +28,7 @@ const navigate = useNavigate()
 
   const data = await res.json()
 
-  if(data.message){
+  if(data.success === false){
     return setErrorMessage(data.message)
   }
   setIsloading(false)

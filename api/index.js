@@ -19,7 +19,19 @@ app.use(cors({
 app.use("/api/user",userRoutes)
 app.use("/api/auth",authRoutes)
 
-app.use(errorHandler)
+app.use((err,req,res,next)=>{
+
+    const statusCode = err.statusCode || 500;
+
+    const message = err.message || "internal Server Error"
+
+    res.status(statusCode).json({
+        success:false,
+        statusCode,
+        message,
+    })
+
+})
 
 app.listen(process.env.PORT || 3000,()=>{
     console.log(`app listen on the port ${process.env.PORT}`)

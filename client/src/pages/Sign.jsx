@@ -1,10 +1,13 @@
 import {Alert, Button, Label, Spinner, TextInput} from "flowbite-react"
 import { useState } from "react"
 import { Link,useNavigate } from "react-router-dom"
+import { signInFailure,signInStart,signInSuccess } from "../redux/user/userSlice"
+import {  useDispatch, useSelector } from "react-redux"
 function Sign() {
+  const {loading,error:errorMessage} = useSelector(state=>state.user)
+  const dispatch = useDispatch()
   const [formdata,setFormdata] = useState({})
-  const [errorMessage,setErrorMessage] = useState(null)
-  const [isloading,setIsloading] = useState(false)
+  
 const navigate = useNavigate()
   const handleChange = (e)=>{
     setFormdata({...formdata,[e.target.id]:e.target.value.trim()})
@@ -14,12 +17,11 @@ const navigate = useNavigate()
   const handleSubmit =async(e)=>{
     e.preventDefault()
 
-    if(!formdata.username || !formdata.email || !formdata.password){
-      return setErrorMessage("All fields are mandatory !")
+    if(!formdata.email || !formdata.password){
+      return dispatch(signInFailure("all fields are mandatory"))
     }
  try {
-  setIsloading(true)
-  setErrorMessage(null)
+  dispatch(signInStart())
   const res = await fetch("/api/auth/signin",{
     headers:{"content-Type":"application/json"},
     method:"POST",
@@ -28,18 +30,18 @@ const navigate = useNavigate()
 
   const data = await res.json()
 
-  if(data.message){
-    return setErrorMessage(data.message)
+  if(data.success===false){
+    return dispatch(signInFailure(data.message))
   }
-  setIsloading(false)
+  
 
   if(res.ok){
+    dispatch(signInSuccess(data))
     navigate("/")
   }
   
  } catch (error) {
-  setErrorMessage("please refresh the page and try again later !",error.message)
-  setIsloading(false)
+  dispatch(signInFailure(error))
 
  }
   }
@@ -74,9 +76,9 @@ const navigate = useNavigate()
               <Label value="Enter your password"></Label>
               <TextInput type="password" placeholder="**********" id="password" onChange={handleChange}/>
             </div>
-            <Button gradientDuoTone="purpleToRed" className="bg-green-600 text-white" type="submit" disabled={isloading}>
+            <Button gradientDuoTone="purpleToRed" className="bg-green-600 text-white" type="submit" disabled={loading}>
               {
-                isloading ? (<div>
+                loading ? (<div>
                   <Spinner size="sm"/>
                   <span className="pl-3 text-white">loading...</span>
                 </div>):<span className="text-white">Sign In</span>
