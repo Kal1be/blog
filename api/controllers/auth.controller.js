@@ -41,13 +41,13 @@ try {
     const validUser = await User.findOne({email})
 
     if(!validUser){
-    return  next(errorHandler(404,"email or password is incorrect "))
+    return  next(errorHandler(404,"email or password is incorrect"))
     }
 
     const checkPassword = await bcrypt.compare(password,validUser.password)
 
     if(!checkPassword){
-    return next(errorHandler(400,"email or password is incorrect !"))
+    return next(errorHandler(400,"email or password is incorrect"))
     }
 
     const token = jwt.sign({id:validUser._id},process.env.ACCESS_TOKEN,{expiresIn:"100h"})
