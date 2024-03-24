@@ -50,7 +50,7 @@ try {
     return next(errorHandler(400,"email or password is incorrect"))
     }
 
-    const token = jwt.sign({id:validUser._id},process.env.ACCESS_TOKEN,{expiresIn:"100h"})
+    const token = jwt.sign({id:validUser._id},process.env.ACCESS_TOKEN,{expiresIn:"30m"})
 
     const {password:pass,...rest} = validUser._doc
 
@@ -70,5 +70,42 @@ try {
 }
 
 
+const google =async (req,res,next)=>{
+    const {name,email,googlePhotoUrl} = req.body
 
-module.exports = {signup,signin}
+    try {
+        
+        const user = await User.findOne({email})
+
+        if(user){
+            const token=jwt.sign({id:user._id},process.env.ACCESS_TOKEN)
+            const {password,...rest} = user._doc
+            res.status(200).cookie("access_token",token,{httpOnly:true}).json(rest)
+        }
+        else{
+            const generatedPassword = Math.random().toString(36).slice(-8)
+
+            const hasPassword = bcrypt.hash(generatedPassword,10)
+
+            const newUser = new User({
+                username:name.toLowerCase().split(" ").join(""),
+                email,
+                password:hashPassword,
+                profilePicture:googlePhotoUrl
+            })
+
+            await newUser.save()
+            const token=jwt.sign({id:user._id},process.env.ACCESS_TOKEN)
+            const {password,...rest} = user._doc
+            res.status(200).cookie("access_token",token,{httpOnly:true}).json(rest)
+        }
+    } catch (error) {
+        next(error)
+    }
+
+    
+}
+
+
+
+module.exports = {signup,signin,google}

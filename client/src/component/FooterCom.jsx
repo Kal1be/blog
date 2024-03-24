@@ -3,7 +3,7 @@ import {Link} from "react-router-dom"
 import {BsFacebook,BsInstagram,BsTwitterX,BsGithub,BsWhatsapp} from "react-icons/bs"
 function FooterCom() {
   return (
-    <Footer container className="border flex-col bg-gray-950 text-white border-t-2 border-t-green-800">
+    <Footer container className="border bottom-0 relative -mb-12 mt-16 flex-col bg-gray-950 text-white border-t-2 border-t-green-800">
      <div className="md:flex">
        <div className="flex-1">
        <Link to="/" className="self-center flex items-center gap-2 text-xl font-medium ">

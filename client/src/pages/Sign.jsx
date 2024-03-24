@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Link,useNavigate } from "react-router-dom"
 import { signInFailure,signInStart,signInSuccess } from "../redux/user/userSlice"
 import {  useDispatch, useSelector } from "react-redux"
+import Oauth from "../component/Oauth"
 function Sign() {
   const {loading,error:errorMessage} = useSelector(state=>state.user)
   const dispatch = useDispatch()
@@ -11,7 +12,7 @@ function Sign() {
 const navigate = useNavigate()
   const handleChange = (e)=>{
     setFormdata({...formdata,[e.target.id]:e.target.value.trim()})
-    console.log(formdata)
+    
   }
 
   const handleSubmit =async(e)=>{
@@ -78,12 +79,13 @@ const navigate = useNavigate()
             </div>
             <Button gradientDuoTone="purpleToRed" className="bg-green-600 text-white" type="submit" disabled={loading}>
               {
-                loading ? (<div>
+                loading ?(<div>
                   <Spinner size="sm"/>
                   <span className="pl-3 text-white">loading...</span>
                 </div>):<span className="text-white">Sign In</span>
               }
             </Button>
+            <Oauth/>
           </form>
           <div className="flex gap-2 text-sm font-medium mt-4">
             <span>Don`t have an account?</span>
