@@ -61,6 +61,7 @@ try {
 
     
 } catch (error) {
+    res.status(500).json({message:error.message})
     
     
 }
@@ -100,7 +101,7 @@ const google =async (req,res,next)=>{
             res.status(200).cookie("access_token",token,{httpOnly:true}).json(rest)
         }
     } catch (error) {
-        next(error)
+       return next(error)
     }
 
     

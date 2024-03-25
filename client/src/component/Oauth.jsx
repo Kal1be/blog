@@ -14,6 +14,7 @@ const navigate = useNavigate()
     provider.setCustomParameters({prompt:"select_account"})
 
     try {
+
       const responseSignup = await signInWithPopup(auth,provider)
       const  res = await fetch("/api/auth/google",{
         method:"POST",
@@ -32,16 +33,15 @@ const navigate = useNavigate()
         navigate("/dashboard")
       }
     } catch (error) {
+     
       console.log(error)
-      
     }
   }
   return (
-    <div>
-    <Button type="button" className="bg-blue-800 text-white w-full" onClick={handleGoogleClick}>
-      <AiFillGoogleCircle className="w-10 h-8 mr-2"/>Continue with Google</Button>
-    </div>
-  )
+    <Button className="bg-blue-800 text-white w-full" onClick={handleGoogleClick}>
+      <AiFillGoogleCircle className="w-10 h-8 mr-2"/>Continue with Google
+      </Button>
+    )
 }
 
 export default Oauth

@@ -5,22 +5,29 @@ import { signInFailure,signInStart,signInSuccess } from "../redux/user/userSlice
 import {  useDispatch, useSelector } from "react-redux"
 import Oauth from "../component/Oauth"
 function Sign() {
-  const {loading,error:errorMessage} = useSelector(state=>state.user)
+  const {loading,error:errorMessage} = useSelector((state)=>state.user)
   const dispatch = useDispatch()
   const [formdata,setFormdata] = useState({})
   
+  // console.log(loading)
 const navigate = useNavigate()
+// the function of handlechange 
+// the procedure is here
+
   const handleChange = (e)=>{
     setFormdata({...formdata,[e.target.id]:e.target.value.trim()})
     
   }
+// the function handlesubmit and 
+// the remain of the function
 
   const handleSubmit =async(e)=>{
     e.preventDefault()
-
+ console.log(loading)
     if(!formdata.email || !formdata.password){
       return dispatch(signInFailure("all fields are mandatory"))
     }
+
  try {
   dispatch(signInStart())
   const res = await fetch("/api/auth/signin",{
@@ -31,7 +38,7 @@ const navigate = useNavigate()
 
   const data = await res.json()
 
-  if(data.success===false){
+  if(data.success==false){
     return dispatch(signInFailure(data.message))
   }
   
@@ -42,7 +49,7 @@ const navigate = useNavigate()
   }
   
  } catch (error) {
-  dispatch(signInFailure(error))
+  return dispatch(signInFailure(error))
 
  }
   }
@@ -82,7 +89,7 @@ const navigate = useNavigate()
                 loading ?(<div>
                   <Spinner size="sm"/>
                   <span className="pl-3 text-white">loading...</span>
-                </div>):<span className="text-white">Sign In</span>
+                </div>) : <span className="text-white">Sign In</span>
               }
             </Button>
             <Oauth/>
