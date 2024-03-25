@@ -86,12 +86,12 @@ const google =async (req,res,next)=>{
         else{
             const generatedPassword = Math.random().toString(36).slice(-8)
 
-            const hasPassword = bcrypt.hash(generatedPassword,10)
+            const hashPassword = bcrypt.hash(generatedPassword,10)
 
             const newUser = new User({
                 username:name.toLowerCase().split(" ").join(""),
                 email,
-                password:hashPassword,
+                password:hashPassword, 
                 profilePicture:googlePhotoUrl
             })
 

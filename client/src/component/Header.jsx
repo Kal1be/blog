@@ -1,9 +1,11 @@
-import {Button, Navbar, TextInput} from "flowbite-react"
+import {Avatar, Button, Dropdown, Navbar, TextInput} from "flowbite-react"
 import { Link,useLocation } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {faMoon} from "@fortawesome/free-solid-svg-icons"
 import {AiOutlineSearch} from "react-icons/ai"
+import {useSelector} from "react-redux"
 function Header() {
+    const {currentUser}=useSelector((state)=>state.user)
     const path = useLocation().pathname
   return (
    <Navbar className="border-b-2 sticky top-0 px-0 z-50 items-center">
@@ -24,9 +26,16 @@ function Header() {
             <Button className="w-12 h-10 hidden sm:inline " color="gray" pill>
                 <FontAwesomeIcon icon={faMoon} className="text-gray-600"/>
             </Button>
-            <Link to="/sign-in">
-                <Button gradientDuoTone="purpleToBlue" outline className="border  border-purple-500 md:py-0 md:px-0 -p-2">Sign in</Button>
-            </Link>
+            {currentUser?(<Dropdown arrowIcon={false} inline label={<Avatar alt="user" href={currentUser.profilePicture} rounded/>}>
+
+                <Dropdown.Header>
+                    <span className="block text-sm">@{currentUser.username}</span>
+                    <span className="block text-sm font-medium ">{currentUser.email}</span>
+                </Dropdown.Header>
+            </Dropdown>):<Link to="/sign-in">
+                <Button gradientDuoTone="purpleToBlue" outline className="border  border-purple-500 md:py-0 md:px-0 -p-2">
+                    Sign in</Button>
+            </Link>}
             <Navbar.Toggle/>
         </div>
             <Navbar.Collapse>
