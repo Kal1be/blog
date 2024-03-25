@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound"
 import Projects from "./pages/Projects"
 import Header from "./component/Header"
 import FooterCom from "./component/FooterCom"
+import PrivateRoute from "./component/PrivateRoute"
 
 function App() {
   return (
@@ -18,7 +19,9 @@ function App() {
   <Route path="/about" element={<About/>}/>
    <Route path="/sign-in" element={<Sign/>}/>
    <Route path="/signup" element={<Signup/>}/>
+   <Route element={<PrivateRoute/>}>
    <Route path="/dashboard"  element={<Dashboard/>}/>
+   </Route>
    <Route path="/projects" element={<Projects/>}/>
    <Route path="*" element={<NotFound/>}/>
    </Routes>

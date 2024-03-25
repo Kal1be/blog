@@ -2,10 +2,12 @@ import {Alert, Button, Label, Spinner, TextInput} from "flowbite-react"
 import { useState } from "react"
 import { Link,useNavigate } from "react-router-dom"
 import Oauth from "../component/Oauth"
+import { useSelector } from "react-redux"
 function Signup() {
   const [formdata,setFormdata] = useState({})
   const [errorMessage,setErrorMessage] = useState(null)
   const [isloading,setIsloading] = useState(false)
+  const {theme} = useSelector((state)=>state.theme)
 const navigate = useNavigate()
   const handleChange = (e)=>{
     setFormdata({...formdata,[e.target.id]:e.target.value.trim()})
@@ -51,7 +53,7 @@ const navigate = useNavigate()
         <div className="flex-1 ">
           <h2 className="text-lg font-medium">
            <h3 className=" flex justify-center">
-             <img src="./icon.jpg" className="w-16 h-16 md:w-20 md:h-20" alt="" />
+             <img src={theme==="light"?"/icon.jpg":"/icon2.jpg"} className="w-16 h-16 md:w-20 md:h-20" alt="" />
            </h3>
          <h2 className="text-center text-xl font-medium">   <span className="text-blue-800">AnasDev</span><span className="text-green-700"> Institute</span></h2>
           </h2>
