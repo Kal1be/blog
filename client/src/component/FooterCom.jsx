@@ -3,12 +3,12 @@ import {Link} from "react-router-dom"
 import {BsFacebook,BsInstagram,BsTwitterX,BsGithub,BsWhatsapp} from "react-icons/bs"
 function FooterCom() {
   return (
-    <Footer container className="border bottom-0 relative -mb-12 mt-16 flex-col bg-gray-950 text-white border-t-2 border-t-green-800">
+    <Footer container className="border bottom-0 relative -mb-12 flex-col bg-gray-950 text-white border-t-2 border-t-green-800">
      <div className="md:flex">
        <div className="flex-1">
        <Link to="/" className="self-center flex items-center gap-2 text-xl font-medium ">
     {/* <span className="px-2 md:py-2 py-1   bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 rounded-lg text-white">Kalibe`s </span> <span> Blog</span> */}
-  <img src="./icon2.jpg" className="md:w-12 md:h-12 w-10 h-10" alt="" />
+  <img src="./icon2.jpg" className="md:w-12 rounded-full md:h-12 w-10 h-10" alt="" />
    <h2 className="">
    <span className="text-blue-800">AnasDev</span> <span className="text-green-700">Institute</span>
    </h2>

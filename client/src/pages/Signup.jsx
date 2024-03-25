@@ -53,7 +53,7 @@ const navigate = useNavigate()
         <div className="flex-1 ">
           <h2 className="text-lg font-medium">
            <h3 className=" flex justify-center">
-             <img src={theme==="light"?"/icon.jpg":"/icon2.jpg"} className="w-16 h-16 md:w-20 md:h-20" alt="" />
+             <img src={theme==="light"?"/icon.jpg":"/icon2.jpg"} className="w-16 rounded-full h-16 md:w-20 md:h-20" alt="" />
            </h3>
          <h2 className="text-center text-xl font-medium">   <span className="text-blue-800">AnasDev</span><span className="text-green-700"> Institute</span></h2>
           </h2>
