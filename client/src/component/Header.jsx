@@ -5,9 +5,9 @@ import {faMoon,faSun} from "@fortawesome/free-solid-svg-icons"
 import {AiOutlineSearch} from "react-icons/ai"
 import {useDispatch, useSelector} from "react-redux"
 import { toggleTheme } from "../redux/theme/themeSlice"
+import { signOutSuccess } from "../redux/user/userSlice"
 function Header() {
     const {currentUser}=useSelector((state)=>state.user)
-    console.log(currentUser.profilePicture)
     const {theme} = useSelector((state)=>state.theme)
     const dispatch = useDispatch()
     const path = useLocation().pathname
@@ -15,7 +15,7 @@ function Header() {
    <Navbar className="border-b-2 sticky top-0 px-0 z-50 items-center">
 <Link to="/" className="md:self-center flex items-center gap-2 font-medium whitespace-nowrap">
     {/* <span className="px-2 md:py-2 py-1   bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 rounded-lg text-white">Kalibe`s </span> <span> Blog</span> */}
-  <img src={theme==="light"?"/icon.jpg":"/icon2.jpg"}  className="md:w-12 rounded-full md:h-12 w-10 h-10" alt="" />
+  <img src={theme==="light"?"/icon.jpg":"/icon2.jpg" }  className="md:w-12 rounded-full md:h-12 w-10 h-10" alt="" />
    <h2>
    <span className="text-blue-800">AnasDev</span> <span className="text-green-700">Institute</span>
    </h2>
@@ -43,7 +43,9 @@ function Header() {
                     <Dropdown.Item>Profile</Dropdown.Item>
                 </Link>
                 <Dropdown.Divider/>
-                <Dropdown.Item>
+                <Dropdown.Item onClick={()=>{
+                    dispatch(signOutSuccess())
+                }}>
                     Signout
                 </Dropdown.Item>
             </Dropdown>):<Link to="/sign-in">

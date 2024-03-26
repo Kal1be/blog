@@ -67,7 +67,7 @@ const deleteUser=async(req,res,next)=>{
 
     try {
         await User.findByIdAndDelete(req.params.userId)
-        res.json(200).json("user delete with success !")
+        res.json(200).json({message:"user delete with success !"})
         
     } catch (error) {
         next(error)
@@ -75,4 +75,15 @@ const deleteUser=async(req,res,next)=>{
 
 }
 
-module.exports = { getUser,updateUser,deleteUser}
+
+const signOut = (req,res,next)=>{
+    try {
+        res.clearCookie("access_token").status(200).json("user sign out with success !")
+        
+    } catch (error) {
+        next(error)
+        
+    }
+}
+
+module.exports = { getUser,updateUser,deleteUser,signOut}
