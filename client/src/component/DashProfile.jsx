@@ -1,19 +1,54 @@
-import {  useSelector } from "react-redux"
+import {  useDispatch, useSelector } from "react-redux"
 import {Alert, Button, TextInput } from "flowbite-react"
 import { useState,useRef,useEffect } from "react"
 import {getDownloadURL, getStorage, uploadBytesResumable} from "firebase/storage"
 import {ref} from "firebase/storage"
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { updateStart,updateFailure,updateSuccess } from "../redux/user/userSlice"
 
 import {app} from "../../firebase"
 function DashProfile() {
+  const dispatch = useDispatch()
   const {currentUser} = useSelector((state)=>state.user)
   const [image,setImage] = useState(null)
   const [imageUrl,setImageUrl] = useState(null)
   const [imageUpload,setImageUpload] = useState(null)
   const [imageError,setImageError] = useState(null)
   const filePickRef = useRef()
+  const [formData,setFormData] = useState({})
+
+  const handleSubmit = async (e)=>{
+    e.preventDefault()
+    if(Object.keys(formData).length===0){
+      return
+    }
+
+    try {
+      dispatch(updateStart())
+      const res = await fetch(`/api/user/update/${currentUser._id}`,{
+        method:'PUT',
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(formData)
+      })
+      
+      const data = await res.json()
+      if(!res.ok){
+         dispatch(updateFailure(data.message))
+      }
+      else{
+        dispatch(updateSuccess(data))
+      }
+
+    } catch (error) {
+      dispatch(updateFailure(error.message))
+    }
+   
+  }
+
+  const handleChange = (e)=>{
+    setFormData({...formData,[e.target.id]:e.target.value})
+  }
 
   const handleImage = (e)=>{
    const file = e.target.files[0]
@@ -67,6 +102,7 @@ function DashProfile() {
     ()=>{
       getDownloadURL(uploadTask.snapshot.ref).then((download)=>{
         setImageUrl(download)
+        setFormData({...formData,profilePicture:download})
       })
     }
   )
@@ -77,7 +113,7 @@ function DashProfile() {
   return (
     <div className="max-w-lg mx-auto w-full px-4 md:px-0">
      <h2 className="text-center my-3 text-xl font-medium">Welcome {currentUser.username} to your profile</h2>
-     <form className="flex flex-col gap-5 md:w-full">
+     <form className="flex flex-col gap-5 md:w-full" onSubmit={handleSubmit}>
       <input type="file" accept="image/*" onChange={handleImage} className="hidden" ref={filePickRef}/>
       <div className="relative w-32 h-32 self-center  shadow-md cursor-pointer rounded-full  " onClick={()=>{
         filePickRef.current.click()
@@ -105,9 +141,9 @@ function DashProfile() {
       </div>
       {imageError && (<Alert color="failure">{imageError}</Alert>)}
 
-      <TextInput type="text" placeholder="username" defaultValue={currentUser.username} id="username"/>
-      <TextInput type="email" placeholder="email" defaultValue={currentUser.email} id="email"/>
-      <TextInput type="text" placeholder="****************" id="password"/>
+      <TextInput type="text" placeholder="username" defaultValue={currentUser.username} onChange={handleChange} id="username"/>
+      <TextInput type="email" placeholder="email" defaultValue={currentUser.email} onChange={handleChange} id="email"/>
+      <TextInput type="text" placeholder="****************" onChange={handleChange} id="password"/>
       <Button type="submit" >Update Profile</Button>
      </form>
      <div className="text-red-500 font-medium text-sm  my-5 flex justify-between">

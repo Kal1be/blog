@@ -8,10 +8,11 @@ const verifyToken = (req,res,next)=>{
         return next(errorHandler(401,"Unhauthorized"))
     }
 
-    jwt.verify(token,process.env.ACCESS_TOKEN,(error,user)=>{
+    jwt.verify(token,process.env.JWT_SEC,(error,user)=>{
         if(error){
             return next(errorHandler(403,"forbidden"))
         }
+
         req.user = user;
         next()
     })

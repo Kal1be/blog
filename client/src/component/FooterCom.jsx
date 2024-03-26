@@ -9,7 +9,7 @@ function FooterCom() {
        <Link to="/" className="self-center flex items-center gap-2 text-xl font-medium ">
     {/* <span className="px-2 md:py-2 py-1   bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 rounded-lg text-white">Kalibe`s </span> <span> Blog</span> */}
   <img src="./icon2.jpg" className="md:w-12 rounded-full md:h-12 w-10 h-10" alt="" />
-   <h2 className="">
+   <h2>
    <span className="text-blue-800">AnasDev</span> <span className="text-green-700">Institute</span>
    </h2>
     </Link>

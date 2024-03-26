@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux"
 import { toggleTheme } from "../redux/theme/themeSlice"
 function Header() {
     const {currentUser}=useSelector((state)=>state.user)
+    console.log(currentUser.profilePicture)
     const {theme} = useSelector((state)=>state.theme)
     const dispatch = useDispatch()
     const path = useLocation().pathname
@@ -31,8 +32,8 @@ function Header() {
                 }}>
                {theme==="light"? <FontAwesomeIcon icon={faMoon}  className="text-gray-600"/>:<FontAwesomeIcon icon={faSun}/>}
             </button>
-            {currentUser?(<Dropdown arrowIcon={false} inline   label={<Avatar alt="user" href={currentUser.profilePicture} rounded className="w-8 h-4"/>}>
-
+            {currentUser?(<Dropdown arrowIcon={false} inline   label={<Avatar href={currentUser.profilePicture}  alt="user" rounded/>}>
+                 
                 <Dropdown.Header>
                     <span className="block text-sm">@{currentUser.username}</span>
                     <span className="block text-sm font-medium ">{currentUser.email}</span>
