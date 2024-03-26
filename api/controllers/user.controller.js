@@ -58,4 +58,21 @@ const updateUser = async (req,res,next)=>{
 
 }
 
-module.exports = { getUser,updateUser }
+
+
+const deleteUser=async(req,res,next)=>{
+    if(req.user.id !== req.params.userId){
+        return next(errorHandler(401,"user is not authorized to delete this contact !"))
+    }
+
+    try {
+        await User.findByIdAndDelete(req.params.userId)
+        res.json(200).json("user delete with success !")
+        
+    } catch (error) {
+        next(error)
+    }
+
+}
+
+module.exports = { getUser,updateUser,deleteUser}

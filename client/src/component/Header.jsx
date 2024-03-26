@@ -1,4 +1,4 @@
-import {Avatar, Button, Dropdown, Navbar, TextInput} from "flowbite-react"
+import { Button, Dropdown, Navbar, TextInput} from "flowbite-react"
 import { Link,useLocation } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {faMoon,faSun} from "@fortawesome/free-solid-svg-icons"
@@ -32,8 +32,9 @@ function Header() {
                 }}>
                {theme==="light"? <FontAwesomeIcon icon={faMoon}  className="text-gray-600"/>:<FontAwesomeIcon icon={faSun}/>}
             </button>
-            {currentUser?(<Dropdown arrowIcon={false} inline   label={<Avatar href={currentUser.profilePicture}  alt="user" rounded/>}>
-                 
+            {currentUser?(<Dropdown arrowIcon={false} inline   label={<img src={currentUser.profilePicture}  alt="user" 
+            className="md:w-12 w-10 object-cover rounded-full md:h-12 h-10"/>}>
+                
                 <Dropdown.Header>
                     <span className="block text-sm">@{currentUser.username}</span>
                     <span className="block text-sm font-medium ">{currentUser.email}</span>
