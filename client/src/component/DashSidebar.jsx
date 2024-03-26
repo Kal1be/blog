@@ -15,12 +15,12 @@ function DashSidebar() {
       }
     },[location.search])
   return (
-    <Sidebar>
+    <Sidebar className="w-full md:w-72">
         <Sidebar.Items>
             <Sidebar.ItemGroup>
                 <Link to="/dashboard?tab=profile">
 
-                <Sidebar.Item active={tab==="profile"} label={"user"} icon={HiUser} labelColor='dark'>
+                <Sidebar.Item active={tab==="profile"} label={"user"} icon={HiUser} labelColor='dark' as="div">
                     Profile
                 </Sidebar.Item>
                 </Link>

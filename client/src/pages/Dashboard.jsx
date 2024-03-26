@@ -16,7 +16,7 @@ function Dashboard() {
   },[location.search])
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
+    <div className="md:min-h-[90vh] w-full mini-h-screen flex flex-col md:flex-row">
       <div className="">
         {/* Sidbar */}
         <DashSidebar/>
