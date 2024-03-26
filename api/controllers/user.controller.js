@@ -1,8 +1,62 @@
 // const asyncHandler = require("express-async-handler")
+const bcrypt = require("bcryptjs")
+
+const errorHandler = require("../utils/error")
+const User = require("../model/user.model")
 
 
 const getUser = async (req,res,next)=>{
     res.json({message:"api created successfull !"})
 }
 
-module.exports = { getUser }
+
+
+const updateUser = async (req,res,next)=>{
+    if(req.user.id !== req.params.userId){
+        return next(errorHandler(401,"you are not authorized to update this user"))
+    }
+    if(req.body.password < 6){
+        return next(errorHandler(400,"password must be at least 8 carractere"))
+    }
+    req.body.password = bcrypt.hash(req.body.password,10)
+
+   if(req.body.username){
+    if(req.body.username <7 || req.body.username > 20){
+        return next(errorHandler(400,"the name must be between 7 to 20 carractere"))
+    }
+    if(req.body.username.includes(" "))
+    {
+        return next(errorHandler(400,"username does not contains spaces"))
+    }
+    if(req.body.username !== req.body.username.toLowerCase()){
+        return next(errorHandler(400,"username must be in lowercase"))
+    }
+
+    if(!req.body.username.match(/^[a-zA-Z0-9]+$/)){
+        return next(errorHandler(400,"username must contain letters and number + $ signe"))
+    }
+
+    try {
+        const update = User.findByIdAndUpdate(req.params.userId,{
+            $set:{
+                username:req.body.username,
+                email:req.body.email,
+                profilePicture:req.body.profilePicture,
+                password:req.body.password
+            }
+        },{
+            new:true
+        })
+
+        const {password,...rest}=update._doc
+
+        res.status(200).json(rest)
+        
+    } catch (error) {
+        next(error)
+    }
+   }
+
+}
+
+module.exports = { getUser,updateUser }

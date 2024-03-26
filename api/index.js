@@ -4,11 +4,13 @@ const connectDb = require("./config/dbConfig")
 const cors = require("cors")
 const userRoutes = require("./routes/user.route")
 const authRoutes = require("./routes/auth.route")
+const cookieParser = require("cookie-parser")
 
 connectDb()
 
 const app = express()
 app.use(express.json())
+app.use(cookieParser())
 app.use(express.urlencoded({extended:true}))
 app.use(cors({
     origin:process.env.HTTP_CORS,
