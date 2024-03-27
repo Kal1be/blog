@@ -5,7 +5,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { app } from "../../firebase";
 import { CircularProgressbar } from "react-circular-progressbar";
-
+import { useNavigate } from "react-router-dom";
 // the start of the function is here
 // everything is here
 function CreatePost() {
@@ -13,7 +13,8 @@ function CreatePost() {
 const [imageUpload,setImageUpload] = useState(null)
 const [imageError,setImageError] = useState(null)
 const [formData,setFormData] = useState({})
-
+const [publishError,setPublishError] = useState(null)
+const navigate = useNavigate()
 
 // the function for handle upload of our file in the firebase
 // the function start here
@@ -63,9 +64,38 @@ const [formData,setFormData] = useState({})
   }
   // the function handlesubmit
 
+const handleSubmit = async (e)=>{
+  e.preventDefault()
+
+  try {
+    const res = await fetch("api/post/create",{
+      headers:{
+        "Content-Type":"application/json",
+      },
+      method:"POST",
+      body:JSON.stringify(formData)
+    })
+
+    const data = await res.json()
+
+    if(!res.ok){
+setPublishError(data.message)
+return
+    }
 
 
+    if(res.ok){
+      setPublishError(null)
+      navigate(`/post/${data.slug}`)
+    }
 
+     
+  } catch (error) {
+    setPublishError("somthing went wrong !")
+  }
+}
+
+  
 
 
 
@@ -74,12 +104,20 @@ const [formData,setFormData] = useState({})
       <h1 className="text-center text-3xl my-7  font-semibold">
         Create a post
       </h1>
-      <form className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
   <div className="flex flex-col gap-4 sm:flex-row justify-between">
-<TextInput type="text" placeholder="Title" id="title" className="flex-1"/>
-<Select>
+<TextInput type="text" placeholder="Title" id="title"
+onChange={(e)=>{
+  setFormData({...formData,title:e.target.value})
+}}
+className="flex-1"/>
+<Select
+onChange={(e)=>{
+ setFormData({...formData,category:e.target.value})
+}}
+>
   <option value="uncathegorized">Select a category</option>
-  <option value="javascrip">JavaScript</option>
+  <option value="javascript">JavaScript</option>
   <option value="reactJs">ReactJs</option>
   <option value="nextjs">NextJs</option>
 </Select>
@@ -103,8 +141,17 @@ const [formData,setFormData] = useState({})
       <img src={formData.image} alt="" className="w-full h-72 object-cover" />
     )
   }
-  <ReactQuill theme="snow" placeholder="write somthing......" className="h-72 mb-12" />
+  <ReactQuill
+  onChange={(value)=>{
+    setFormData({...formData,content:value})
+  }}
+  theme="snow" placeholder="write somthing......" className="h-72 mb-12" />
   <Button type="submit">Publish post</Button>
+  {publishError && (
+    <Alert color="failure" className="mt-5">
+{publishError}
+    </Alert>
+  )}
       </form>
       
     </div>

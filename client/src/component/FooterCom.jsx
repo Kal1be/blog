@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 function FooterCom() {
   const {theme} = useSelector((state)=>state.theme)
   return (
-    <Footer container className="border bottom-0 relative mt-8 -mb-12 flex-col bg-white text-gray-700 dark:text-gray-200 dark:bg-[#101010] border-t-2 border-t-green-800">
+    <Footer container className="border bottom-0 relative -mb-12 flex-col bg-white text-gray-700 dark:text-gray-200 dark:bg-[#101010] border-t-2 border-t-green-800">
      <div className="md:flex">
        <div className="flex-1">
        <Link to="/" className="self-center flex items-center gap-2 text-xl font-medium ">
