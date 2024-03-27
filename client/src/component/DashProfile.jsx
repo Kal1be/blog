@@ -10,9 +10,10 @@ import 'react-circular-progressbar/dist/styles.css';
 import { updateStart,updateFailure,updateSuccess } from "../redux/user/userSlice"
 
 import {app} from "../../firebase"
+import { Link } from "react-router-dom"
 function DashProfile() {
   const dispatch = useDispatch()
-  const {currentUser,error} = useSelector((state)=>state.user)
+  const {currentUser,error,loading} = useSelector((state)=>state.user)
   const [image,setImage] = useState(null)
   const [showModal,setShowModal] = useState(false)
   const [imageUrl,setImageUrl] = useState(null)
@@ -21,6 +22,7 @@ function DashProfile() {
   const filePickRef = useRef()
   const [formData,setFormData] = useState({})
 
+  const isadmin=true
 
 
   const handleDelete=async()=>{
@@ -198,7 +200,15 @@ function DashProfile() {
       <TextInput type="text" placeholder="username" defaultValue={currentUser.username} onChange={handleChange} id="username"/>
       <TextInput type="email" placeholder="email" defaultValue={currentUser.email} onChange={handleChange} id="email"/>
       <TextInput type="text" placeholder="****************" onChange={handleChange} id="password"/>
-      <Button type="submit" >Update Profile</Button>
+      <Button type="submit" disabled={loading} >{loading?"loading......":"Update profile"}</Button>
+
+      {
+        isadmin && (
+          <Link to="/create-post">
+          <button className="bg-green-800 p-2 rounded-lg w-full">Create a Post</button>
+          </Link>
+        )
+      }
      </form>
      <div className="text-red-500 font-medium text-sm  my-5 flex justify-between">
       <span onClick={()=>{

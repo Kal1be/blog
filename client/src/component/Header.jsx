@@ -12,7 +12,7 @@ function Header() {
     const dispatch = useDispatch()
     const path = useLocation().pathname
   return (
-   <Navbar className="border-b-2 sticky top-0 px-0 z-50 items-center">
+   <Navbar className="border-b-2 sticky top-0 px-0 z-50 bg-white text-gray-700 dark:text-gray-200 dark:bg-[#101010] items-center">
 <Link to="/" className="md:self-center flex items-center gap-2 font-medium whitespace-nowrap">
     {/* <span className="px-2 md:py-2 py-1   bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 rounded-lg text-white">Kalibe`s </span> <span> Blog</span> */}
   <img src={theme==="light"?"/icon.jpg":"/icon2.jpg" }  className="md:w-12 rounded-full md:h-12 w-10 h-10" alt="" />
@@ -27,7 +27,7 @@ function Header() {
 <AiOutlineSearch/>
        </Button>
         <div className="flex md:gap-8 gap-0 items-center md:order-2">
-            <button className="w-10 border border-gray-300 rounded-full h-10 hidden sm:inline "  onClick={()=>{
+            <button className="w-10 border border-gray-300 rounded-full h-10 hidden sm:inline"  onClick={()=>{
                     dispatch(toggleTheme())
                 }}>
                {theme==="light"? <FontAwesomeIcon icon={faMoon}  className="text-gray-600"/>:<FontAwesomeIcon icon={faSun}/>}
@@ -52,9 +52,18 @@ function Header() {
                 <Button gradientDuoTone="purpleToBlue" outline className="border  border-purple-500 md:py-0 md:px-0 -p-2">
                     Sign in</Button>
             </Link>}
-            <Navbar.Toggle/>
         </div>
+          <Navbar.Toggle/>
             <Navbar.Collapse>
+                <div className=" border flex w-[160px] mx-2 p-1 rounded-full sm:hidden items-center gap-2 ">
+            <button className="w-10 border border-gray-300 rounded-full h-10 inline sm:hidden"  onClick={()=>{
+                    dispatch(toggleTheme())
+                }}>
+               {theme==="light"? <FontAwesomeIcon icon={faMoon}  className="text-gray-600"/>:<FontAwesomeIcon icon={faSun}/>}
+            </button>
+                {theme==="light"?<h2 className="text-sm font-medium">Dark mode</h2>:<h2 className="text-sm font-medium">Light mode</h2>}
+
+                </div>
                 <Navbar.Link active={path==="/"}  as={"div"}>
     <Link to="/" >
     Home   
@@ -70,11 +79,6 @@ function Header() {
     Projects
     </Link>
    </Navbar.Link>
-   {/* <Navbar.Link as={"div"}>
-    <Link to="./sign-in">
-   <Button gradientDuoTone="purpleToBlue" outline className="border w-full text-center inline md:hidden border-purple-500 md:py-0 md:px-0 -p-2">Sign in</Button>
-    </Link>
-   </Navbar.Link> */}
    </Navbar.Collapse>
 
    </Navbar>

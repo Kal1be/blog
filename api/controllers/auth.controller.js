@@ -50,7 +50,7 @@ try {
     return next(errorHandler(400,"email or password is incorrect"))
     }
 
-    const token = jwt.sign({id:validUser._id},process.env.JWT_SEC)
+    const token = jwt.sign({id:validUser._id,isAdmin:validUser.isAdmin},process.env.JWT_SEC)
 
     const {password:pass,...rest} = validUser._doc
 
@@ -79,7 +79,7 @@ const google =async (req,res,next)=>{
         const user = await User.findOne({email})
 
         if(user){
-            const token=jwt.sign({id:user._id},process.env.ACCESS_TOKEN)
+            const token=jwt.sign({id:user._id,isAdmin:user.isAdmin},process.env.JWT_SEC)
             const {password,...rest} = user._doc
             res.status(200).cookie("access_token",token,{httpOnly:true}).json(rest)
         }
@@ -96,7 +96,7 @@ const google =async (req,res,next)=>{
             })
 
             await newUser.save()
-            const token=jwt.sign({id:user._id},process.env.JWT_SEC)
+            const token=jwt.sign({id:user._id,isAdmin:newUser.isAdmin},process.env.JWT_SEC)
             const {password,...rest} = user._doc
             res.status(200).cookie("access_token",token,{httpOnly:true}).json(rest)
         }
