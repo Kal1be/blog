@@ -205,7 +205,7 @@ function DashProfile() {
       {
         isadmin && (
           <Link to="/create-post">
-          <button className="bg-green-800 p-2 rounded-lg w-full">Create a Post</button>
+          <button className="bg-green-800 p-2 rounded-lg w-full dark:text-white text-white">Create a Post</button>
           </Link>
         )
       }
