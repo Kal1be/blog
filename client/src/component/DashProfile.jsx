@@ -171,7 +171,7 @@ function DashProfile() {
      <h2 className="text-center my-3 text-xl font-medium">Welcome {currentUser.username} to your profile</h2>
      <form className="flex flex-col gap-5 md:w-full" onSubmit={handleSubmit}>
       <input type="file" accept="image/*" onChange={handleImage} className="hidden" ref={filePickRef}/>
-      <div className="relative w-32 h-32 self-center  shadow-md cursor-pointer rounded-full  " onClick={()=>{
+      <div className="relative w-32 h-32  self-center  shadow-md cursor-pointer rounded-full  " onClick={()=>{
         filePickRef.current.click()
       }}>
         {imageUpload && (
