@@ -1,4 +1,4 @@
-import { Table } from "flowbite-react"
+import { Button, Table } from "flowbite-react"
 import {useEffect, useState} from "react"
 import {Link} from "react-router-dom"
 import {useSelector} from "react-redux"
@@ -6,7 +6,26 @@ import {useSelector} from "react-redux"
 function DashPost() {
   const [userPosts,setUserPosts] = useState([])
   const {currentUser} = useSelector((state)=>state.user)
+  const [showMore,setShowMore] = useState(true)
 console.log(userPosts)
+
+const handleShowMore = async ()=>{
+  const startIndex = userPosts.length
+
+  try {
+    const res = await fetch(`/api/post/getposts?userId?=${currentUser._id}&startIndex=${startIndex}`)
+    const data = await res.json()
+    if(res.ok){
+      setUserPosts((prev)=>[...prev,...data.posts])
+      if(data.posts.length < 9){
+        setShowMore(false)
+      }
+    }
+     
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 useEffect(()=>{
 
@@ -17,7 +36,11 @@ useEffect(()=>{
     console.log(data.posts)
    if(res.ok){
     setUserPosts(data.posts)
-   }
+     if(data.posts<9){
+    setShowMore(false)
+
+     }
+  }
 
    if(!res.ok){
     console.log(data.error)
@@ -33,7 +56,7 @@ if(currentUser.isAdmin){
 
 },[currentUser._id])
 
-  return <div className="table-auto w-full overflow-x-scroll
+  return <div className="table-auto w-full h-[800px] overflow-y-scroll overflow-x-scroll
    md:mx-auto p-3 scrollbar scrollbar-track-slate-100
     scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-500 dark:scrollbar-track-slate-700">
     {currentUser.isAdmin && userPosts.length > 0 ? (
@@ -81,6 +104,14 @@ if(currentUser.isAdmin){
    
   })}
      </Table>  
+
+     {
+      showMore ? (<button 
+        onClick={handleShowMore}
+        className="w-full test-teal-500 self-center text-sm py-7 font-medium ">Show more...</button>):<button    className="w-full test-teal-500 self-center text-sm py-7 font-medium " onClick={()=>{
+          setShowMore(true)
+        }}>Show less...</button>
+     }
        </>
     ):<p>You have not posts yet</p> }
   </div>
