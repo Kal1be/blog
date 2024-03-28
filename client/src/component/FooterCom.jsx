@@ -1,26 +1,28 @@
 import {Footer} from "flowbite-react"
 import {Link} from "react-router-dom"
 import {BsFacebook,BsInstagram,BsTwitterX,BsGithub,BsWhatsapp} from "react-icons/bs"
-import { useSelector } from "react-redux"
+// import { useSelector } from "react-redux"
 
 function FooterCom() {
-  const {theme} = useSelector((state)=>state.theme)
+  // const {theme} = useSelector((state)=>state.theme)
   return (
-    <Footer container className="border bottom-0 relative -mb-12 flex-col bg-white text-gray-700 dark:text-gray-200 dark:bg-[#101010] border-t-2 border-t-green-800">
+    <Footer container className="border bottom-0 relative -mb-12 flex-col border-t-2 border-t-green-800">
      <div className="md:flex">
        <div className="flex-1">
        <Link to="/" className="self-center flex items-center gap-2 text-xl font-medium ">
     {/* <span className="px-2 md:py-2 py-1   bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 rounded-lg text-white">Kalibe`s </span> <span> Blog</span> */}
-  <img src={theme=="light"?"/icon.jpg":"/icon2.jpg"}className="md:w-12 rounded-full md:h-12 w-10 h-10" alt="" />
+  {/* <img src={theme=="light"?"/icon.jpg":"/icon2.jpg"}className="md:w-12 rounded-full md:h-12 w-10 h-10" alt="" />
    <h2>
    <span className="text-blue-800">AnasDev</span> <span className="text-green-700">Institute</span>
-   </h2>
+   </h2> */}
+
+   <img src="/abuimage.png" alt="" className=" h-12" />
     </Link>
    <p className=" dark:text-white text-gray-800">Lorem ipsum dolor, ullam tempore ipsam facere. Architecto eius amet adipisci nam pariatur commodi ad similique quis, illo dolorum illum soluta officiis ex numquam magnam inventore aliquam impedit ea eaque provident maxime hic nisi. Doloremque repellat praesentium amet eveniet.</p>
         </div> 
        <div className="md:flex  flex-1 w-full justify-around gap-8">
        <div className="grid-cols-2 mt-3  gap-3 sm:mt-4 sm:grid-cols-3 sm:gap-6">
-           <h2> <Footer.Title title="About the Institute"/></h2>
+           <h2> <Footer.Title title="About Distance Learning"/></h2>
             <Footer.LinkGroup col>
            <Footer.Link href="kal1be.github.io/yahoulbo-portfolio" rel="noopener nonreferrer" className="" target="_blank">
             100 js Projects</Footer.Link> 
@@ -30,7 +32,7 @@ function FooterCom() {
             </Footer.LinkGroup>
         </div>
         <div className=" grid-cols-2  mt-3   gap-3 sm:mt-4 sm:grid-cols-3 sm:gap-6">
-            <Footer.Title title="Follow AnasDev"/>
+            <Footer.Title title="Follow DLC"/>
             <Footer.LinkGroup col>
            <Footer.Link href="github.com/kal1be" rel="noopener nonreferrer" className="" target="_blank">
          Github</Footer.Link> 
@@ -40,7 +42,7 @@ function FooterCom() {
             </Footer.LinkGroup>
         </div>
         <div className=" grid-cols-2  mt-3   gap-3 sm:mt-4 sm:grid-cols-3 sm:gap-6">
-            <Footer.Title title="Join AnasDev Institute"/>
+            <Footer.Title title="Join Distance Learning"/>
             <Footer.LinkGroup col>
            <Footer.Link href="github.com/kal1be" rel="noopener nonreferrer" className="" target="_blank">
         Privacy Policy</Footer.Link> 
@@ -64,7 +66,7 @@ function FooterCom() {
      </div>
 <Footer.Divider/>
 <div className="md:flex justify-between  text-sm dark:text-white text-slate-600 font-medium w-full"> 
-    <h2 className="mt-2">Copyright AnasDev Institute</h2>
+    <h2 className="mt-2">Copyright Distance Learning Center</h2>
     <h2 className="flex mt-2 gap-1 items-center">
       <Footer.Copyright by="DevSoftware Yahoulbo" year={new Date().getFullYear()} className="dark:text-white text-slate-600 font-medium"/> <span></span>
     </h2>

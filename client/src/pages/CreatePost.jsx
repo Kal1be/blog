@@ -100,7 +100,7 @@ return
 
 
   return (
-    <div className="p-3 max-w-3xl mx-auto min-h-screen">
+    <div className="p-3 max-w-4xl mx-auto min-h-screen">
       <h1 className="text-center text-3xl my-7  font-semibold">
         Create a post
       </h1>
@@ -120,6 +120,8 @@ onChange={(e)=>{
   <option value="javascript">JavaScript</option>
   <option value="reactJs">ReactJs</option>
   <option value="nextjs">NextJs</option>
+  <option value="redux">Redux</option>
+  <option value="mastery">Mastery</option>
 </Select>
   </div>
   <div className="flex gap-4 items-center justify-between border-4 border-teal-500

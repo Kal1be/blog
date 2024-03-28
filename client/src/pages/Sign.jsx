@@ -5,7 +5,7 @@ import { signInFailure,signInStart,signInSuccess } from "../redux/user/userSlice
 import {  useDispatch, useSelector } from "react-redux"
 import Oauth from "../component/Oauth"
 function Sign() {
-  const {theme} = useSelector((state)=>state.theme)
+  // const {theme} = useSelector((state)=>state.theme)
   const {loading,error:errorMessage} = useSelector((state)=>state.user)
   const dispatch = useDispatch()
   const [formdata,setFormdata] = useState({})
@@ -60,10 +60,14 @@ const navigate = useNavigate()
         {/* left side */}
         <div className="flex-1 ">
           <h2 className="text-lg font-medium">
-           <h3 className=" flex justify-center">
-           <img src={theme==="light"?"/icon.jpg":"/icon2.jpg"} className="w-16 rounded-full h-16 md:w-20 md:h-20" alt="" />
-           </h3>
+           {/* <h3 className=" flex justify-center"> */}
+           {/* <img src={theme==="light"?"/icon.jpg":"/icon2.jpg"} className="w-16 rounded-full h-16 md:w-20 md:h-20" alt="" /> */}
+           {/* <img src="/abuimage.png" alt="" /> */}
+           {/* </h3>
          <h2 className="text-center text-xl font-medium">   <span className="text-blue-800">AnasDev</span><span className="text-green-700"> Institute</span></h2>
+          </h2> */}
+
+          <img src="/abuimage.png" className="md:h-16 h-12 md:w-full w-48" alt="" />
           </h2>
             <p className="text-sm mt-1 dark:text-white ">This is the signin page for login the user,you can login with your email and password or you can login with your google information by clicking in the google button below the the button section!</p>
         </div>

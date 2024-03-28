@@ -12,13 +12,14 @@ function Header() {
     const dispatch = useDispatch()
     const path = useLocation().pathname
   return (
-   <Navbar className="border-b-2 sticky top-0 px-0 z-50 bg-white text-gray-700 dark:text-gray-200 dark:bg-[#101010] items-center">
+   <Navbar className="border-b-2 sticky top-0 px-0 z-50 items-center">
 <Link to="/" className="md:self-center flex items-center gap-2 font-medium whitespace-nowrap">
     {/* <span className="px-2 md:py-2 py-1   bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 rounded-lg text-white">Kalibe`s </span> <span> Blog</span> */}
-  <img src={theme==="light"?"/icon.jpg":"/icon2.jpg" }  className="md:w-12 rounded-full md:h-12 w-10 h-10" alt="" />
+  {/* <img src={theme==="light"?"/icon.jpg":"/icon2.jpg" }  className="md:w-12 rounded-full md:h-12 w-10 h-10" alt="" />
    <h2>
    <span className="text-blue-800">AnasDev</span> <span className="text-green-700">Institute</span>
-   </h2>
+   </h2> */}
+   <img src="/abuimage.png" alt="" className="md:h-12 h-10 md:w-full w-44" />
     </Link>
     <form>
         <TextInput type="text" placeholder="search" rightIcon={AiOutlineSearch} className="hidden lg:inline"/>

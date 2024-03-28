@@ -47,7 +47,7 @@ function App() {
    <Route element={<PrivateAdmin/>}>
    <Route path="/create-post" element={<CreatePost/>}/>
    </Route>
-   <Route path="*" element={<NotFound/>}/>
+   {/* <Route path="*" element={<NotFound/>}/> */}
    </Routes>
    <FooterCom/>
    </BrowserRouter>
