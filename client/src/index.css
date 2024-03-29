@@ -5,11 +5,18 @@
 
 
 .my-image{
+    /* height: 100vh; */
    animation: kalibe 3s linear infinite;
    scale:.1;
    transform: rotate(100);
    border-radius: 50%;
+   transform: rotate(360%);
    
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 body{
@@ -47,6 +54,7 @@ font-size: 1.05rem;
 
 .post-content p{
     margin-bottom: 0.5rem;
+    color: rgb(165, 165, 165);
 }
 
 .post-content h1{

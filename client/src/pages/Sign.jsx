@@ -67,9 +67,9 @@ const navigate = useNavigate()
          <h2 className="text-center text-xl font-medium">   <span className="text-blue-800">AnasDev</span><span className="text-green-700"> Institute</span></h2>
           </h2> */}
 
-          <img src="/abuimage.png" className="md:h-16 h-12 md:w-full w-48" alt="" />
+          <img src="/abuimage.png" className="md:h-16 h-12 md:w-96 w-48" alt="" />
           </h2>
-            <p className="text-sm mt-1 dark:text-white ">This is the signin page for login the user,you can login with your email and password or you can login with your google information by clicking in the google button below the the button section!</p>
+            <p className="text-lg mt-1 dark:text-white ">This is the signin page for login the user,you can login with your email and password or you can login with your google information by clicking in the google button below the the button section!</p>
         </div>
         {/* right side */}
         <div className="flex-1">

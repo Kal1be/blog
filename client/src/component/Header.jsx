@@ -12,7 +12,7 @@ function Header() {
     const dispatch = useDispatch()
     const path = useLocation().pathname
   return (
-   <Navbar className="border-b-2 sticky top-0 px-0 z-50 items-center">
+   <Navbar className="border-b-2 bg-green-900 text-white sticky top-0 px-0 z-50 items-center">
 <Link to="/" className="md:self-center flex items-center gap-2 font-medium whitespace-nowrap">
     {/* <span className="px-2 md:py-2 py-1   bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 rounded-lg text-white">Kalibe`s </span> <span> Blog</span> */}
   {/* <img src={theme==="light"?"/icon.jpg":"/icon2.jpg" }  className="md:w-12 rounded-full md:h-12 w-10 h-10" alt="" />
@@ -31,7 +31,7 @@ function Header() {
             <button className="w-10 border border-gray-300 rounded-full h-10 hidden sm:inline"  onClick={()=>{
                     dispatch(toggleTheme())
                 }}>
-               {theme==="light"? <FontAwesomeIcon icon={faMoon}  className="text-gray-600"/>:<FontAwesomeIcon icon={faSun}/>}
+               {theme==="light"? <FontAwesomeIcon icon={faMoon}  className="text-gray-200"/>:<FontAwesomeIcon icon={faSun}/>}
             </button>
             {currentUser?(<Dropdown arrowIcon={false} inline   label={<img src={currentUser.profilePicture}  alt="user" 
             className="md:w-12 w-10 object-cover rounded-full md:h-12 h-10"/>}>
@@ -56,27 +56,27 @@ function Header() {
         </div>
           <Navbar.Toggle/>
             <Navbar.Collapse>
-                <div className=" border flex w-[160px] mx-2 p-1 rounded-full sm:hidden items-center gap-2 ">
+                <div className=" border flex w-[160px] mx-2 p-1 text-white rounded-full sm:hidden items-center gap-2 ">
             <button className="w-10 border border-gray-300 rounded-full h-10 inline sm:hidden"  onClick={()=>{
                     dispatch(toggleTheme())
                 }}>
-               {theme==="light"? <FontAwesomeIcon icon={faMoon}  className="text-gray-600"/>:<FontAwesomeIcon icon={faSun}/>}
+               {theme==="light"? <FontAwesomeIcon icon={faMoon}  className="text-white light:text-white dark:text-white"/>:<FontAwesomeIcon icon={faSun}  className="text-white"/>}
             </button>
                 {theme==="light"?<h2 className="text-sm font-medium">Dark mode</h2>:<h2 className="text-sm font-medium">Light mode</h2>}
 
                 </div>
                 <Navbar.Link active={path==="/"}  as={"div"}>
-    <Link to="/" >
+    <Link to="/" className="text-white">
     Home   
       </Link>
                 </Navbar.Link>
    <Navbar.Link active={path==="/about"} as={"div"}>
-   <Link to="/about">
+   <Link to="/about"  className="text-white">
     About 
    </Link>
    </Navbar.Link >
    <Navbar.Link active={path==="/projects"} as={"div"} >
-   <Link to="/projects">
+   <Link to="/projects"  className="text-white">
     Projects
     </Link>
    </Navbar.Link>
@@ -85,5 +85,7 @@ function Header() {
    </Navbar>
   )
 }
+
+
 
 export default Header

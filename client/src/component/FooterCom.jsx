@@ -25,9 +25,9 @@ function FooterCom() {
            <h2> <Footer.Title title="About Distance Learning"/></h2>
             <Footer.LinkGroup col>
            <Footer.Link href="kal1be.github.io/yahoulbo-portfolio" rel="noopener nonreferrer" className="" target="_blank">
-            100 js Projects</Footer.Link> 
+           Our Students</Footer.Link> 
            <Footer.Link href="/about" rel="noopener nonreferrer" className="" target="_blank">
-            AnasDev Institute</Footer.Link> 
+            Ahmadu Bello University</Footer.Link> 
             
             </Footer.LinkGroup>
         </div>
@@ -35,9 +35,9 @@ function FooterCom() {
             <Footer.Title title="Follow DLC"/>
             <Footer.LinkGroup col>
            <Footer.Link href="github.com/kal1be" rel="noopener nonreferrer" className="" target="_blank">
-         Github</Footer.Link> 
+         Facebook</Footer.Link> 
            <Footer.Link href="#" rel="noopener nonreferrer" target="_blank" className="">
-      Join Discord</Footer.Link> 
+      XTwitter</Footer.Link> 
             
             </Footer.LinkGroup>
         </div>
@@ -65,10 +65,10 @@ function FooterCom() {
        </div>
      </div>
 <Footer.Divider/>
-<div className="md:flex justify-between  text-sm dark:text-white text-slate-600 font-medium w-full"> 
+<div className="md:flex justify-between  text-xs dark:text-white text-slate-600 w-full font-medium"> 
     <h2 className="mt-2">Copyright Distance Learning Center</h2>
     <h2 className="flex mt-2 gap-1 items-center">
-      <Footer.Copyright by="DevSoftware Yahoulbo" year={new Date().getFullYear()} className="dark:text-white text-slate-600 font-medium"/> <span></span>
+      <Footer.Copyright by="DevSoftware Yahoulbo" year={new Date().getFullYear()} className="dark:text-white text-slate-600 text-xs font-medium"/> <span></span>
     </h2>
 </div>
     </Footer>

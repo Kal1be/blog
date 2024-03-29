@@ -13,25 +13,27 @@ import CreatePost from "./pages/CreatePost"
 import PrivateAdmin from "./component/PrivateAdmin"
 import UpdatePost from "./pages/UpdatePost"
 import Postpage from "./pages/Postpage"
-// import {useState,useEffect} from "react"
+import {useState,useEffect} from "react"
 // import { useSelector } from "react-redux"
 
 function App() {
-  // const [loading,setLoading] = useState(false)
+  const [loading,setLoading] = useState(false)
   // const{theme} = useSelector((state)=>state.theme)
-  // useEffect(()=>{
-  //   setTimeout(() => {
-  //     setLoading(true)
-  //   }, 7000);
-  // },[loading])
+  useEffect(()=>{
+    setTimeout(() => {
+      setLoading(true)
+    }, 8000);
+  },[loading])
 
-  // if(!loading){
-  //   return (
-  //     <div className=" max-w-screen mx-auto flex justify-center items-center h-screen my-auto">
-  //       <img src={theme=="light"?"/icon.jpg":"icon2.jpg"} alt="my-icon image" className="my-image shadow-2xl"/>
-  //     </div>
-  //   )
-  // }
+  if(!loading){
+    return (
+     <div className="absolute h-screen w-screen overflow-x-hidden overflow-y-hidden">
+       <div className="bg-white max-w-screen mx-auto flex justify-center items-center h-screen my-auto">
+        <img src="/abu-logo.jpg" alt="my-icon image" className="my-image w-72 h-72 object-cover p-6 shadow-2xl"/>
+      </div>
+     </div>
+    )
+  }
 
 
   return (

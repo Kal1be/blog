@@ -85,7 +85,7 @@ try {
 }
 }
 
-  return <div className="table-auto w-full h-[800px] overflow-y-scroll overflow-x-scroll
+  return <div className="table-auto w-full md:h-[800px] overflow-y-scroll overflow-x-scroll
    md:mx-auto p-3 scrollbar scrollbar-track-slate-100
     scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-500 dark:scrollbar-track-slate-700">
     {currentUser.isAdmin && userPosts.length > 0 ? (
@@ -142,7 +142,8 @@ try {
      {
       showMore ? (<button 
         onClick={handleShowMore}
-        className="w-full test-teal-500 self-center text-sm py-7 font-medium ">Show more...</button>):<button    className="w-full test-teal-500 self-center text-sm py-7 font-medium " onClick={()=>{
+        className="w-full test-teal-500 self-center text-sm py-7 font-medium ">Show more...</button>):<button  
+          className="w-full test-teal-500 self-center text-sm py-7 font-medium " onClick={()=>{
           setShowMore(true)
         }}>Show less...</button>
      }
