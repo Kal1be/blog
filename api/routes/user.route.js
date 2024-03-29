@@ -12,5 +12,4 @@ router.post("/signout",signOut)
 
 router.get("/getusers",verifyToken,getUsers)
 
-
 module.exports = router

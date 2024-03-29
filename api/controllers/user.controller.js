@@ -61,7 +61,7 @@ const updateUser = async (req,res,next)=>{
 
 
 const deleteUser=async(req,res,next)=>{
-    if(req.user.id !== req.params.userId){
+    if(!req.user.isAdmin && req.user.id !== req.params.userId){
         return next(errorHandler(401,"user is not authorized to delete this contact !"))
     }
 
