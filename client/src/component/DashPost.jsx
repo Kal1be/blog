@@ -77,7 +77,7 @@ try {
     setUserPosts((prev)=>{
       prev.filter((post)=>post._id !== postIdToDelete)
     })
-    window.refresh()
+    window.location.reload(false)
   }
   
 } catch (error) {

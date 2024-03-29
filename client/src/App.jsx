@@ -4,13 +4,14 @@ import About from "./pages/About"
 import Sign from "./pages/Sign"
 import Signup from "./pages/Signup"
 import Dashboard from "./pages/Dashboard"
-import NotFound from "./pages/NotFound"
+// import NotFound from "./pages/NotFound"
 import Projects from "./pages/Projects"
 import Header from "./component/Header"
 import FooterCom from "./component/FooterCom"
 import PrivateRoute from "./component/PrivateRoute"
 import CreatePost from "./pages/CreatePost"
 import PrivateAdmin from "./component/PrivateAdmin"
+import UpdatePost from "./pages/UpdatePost"
 // import {useState,useEffect} from "react"
 // import { useSelector } from "react-redux"
 
@@ -45,6 +46,7 @@ function App() {
    </Route>
    <Route path="/projects" element={<Projects/>}/>
    <Route element={<PrivateAdmin/>}>
+    <Route path="/update-post/:postId" element={<UpdatePost/>}/>
    <Route path="/create-post" element={<CreatePost/>}/>
    </Route>
    {/* <Route path="*" element={<NotFound/>}/> */}

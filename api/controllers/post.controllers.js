@@ -70,7 +70,8 @@ res.status(200).json(
     }
 }
 
-
+// the route of the update post
+// the route is
 const deletePost = async (req,res,next)=>{
 if(!req.user.isAdmin || req.user.id !== req.params.userId){
     return next(errorHandler(403,"you are not allowed to delete this post"))
@@ -84,5 +85,32 @@ try {
 }
 }
 
+// the update post road
+// this is here
 
-module.exports = {create,getPost,deletePost }
+const updatePost = async (req,res,next)=>{
+    if(!req.user.isAdmin || req.user.id !== req.params.userId){
+        return next(errorHandler(403,"you are not allowed to edit this post"))
+    }  
+
+    try {
+        const update = await Post.findByIdAndUpdate(
+            req.params.postId,
+            {
+               title:req.body.title,
+               content:req.body.content,
+               category:req.body.category,
+               image:req.body.image
+            },
+            {new:true}
+        )
+
+        res.status(200).json(update)
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+module.exports = {create,getPost,deletePost,updatePost }
