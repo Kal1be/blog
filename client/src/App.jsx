@@ -12,6 +12,7 @@ import PrivateRoute from "./component/PrivateRoute"
 import CreatePost from "./pages/CreatePost"
 import PrivateAdmin from "./component/PrivateAdmin"
 import UpdatePost from "./pages/UpdatePost"
+import Postpage from "./pages/Postpage"
 // import {useState,useEffect} from "react"
 // import { useSelector } from "react-redux"
 
@@ -49,7 +50,7 @@ function App() {
     <Route path="/update-post/:postId" element={<UpdatePost/>}/>
    <Route path="/create-post" element={<CreatePost/>}/>
    </Route>
-   {/* <Route path="*" element={<NotFound/>}/> */}
+   <Route path="/post/:postSlug" element={<Postpage/>}/>
    </Routes>
    <FooterCom/>
    </BrowserRouter>
