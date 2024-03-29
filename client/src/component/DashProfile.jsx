@@ -165,8 +165,8 @@ function DashProfile() {
   }
  }
   return (
-    <div className="max-w-lg mx-auto w-full px-4 md:px-0">
-     <h2 className="text-center my-3 text-xl font-medium">Welcome {currentUser.username} to your profile</h2>
+    <div className="max-w-lg mx-auto w-full mt-8 px-4 md:px-0">
+    
      <form className="flex flex-col gap-5 md:w-full" onSubmit={handleSubmit}>
       <input type="file" accept="image/*" onChange={handleImage} className="hidden" ref={filePickRef}/>
       <div className="relative w-32 h-32 self-center  shadow-md cursor-pointer rounded-full  " onClick={()=>{
@@ -192,7 +192,9 @@ function DashProfile() {
         )}
       <img src={imageUrl || currentUser.profilePicture} alt="" 
       className="w-full h-full p-0 object-cover border-4  rounded-full border-[lightgray]"/>
+      
       </div>
+      <h2 className="text-center my-3 text-xl font-medium">Welcome {currentUser.username} to your profile</h2>
       {imageError && (<Alert color="failure">{imageError}</Alert>)}
 
       <TextInput type="text" placeholder="username" defaultValue={currentUser.username} onChange={handleChange} id="username"/>

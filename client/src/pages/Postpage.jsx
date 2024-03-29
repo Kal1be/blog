@@ -4,14 +4,17 @@ import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import CallAction from "../component/CallAction"
 import {useSelector} from "react-redux"
+// import CommentSection from "../component/CommentSection"
+import {  Textarea } from "flowbite-react"
 
-function Postpage() {
+const Postpage=()=> {
+  const [comments,setComments] = useState(" ")
     const {postSlug} = useParams()
   const [loading,setLoading] = useState()
   const [error,setError] = useState(false)
   const [post,setPost] = useState(null)
   const {currentUser} = useSelector((state)=>state.user)
-  
+  // console.log(post._id)
     useEffect(()=>{
        const fetchPost = async ()=>{
         try {
@@ -39,6 +42,13 @@ function Postpage() {
 
        fetchPost()
     },[postSlug])
+
+
+    const handleSubmit = async (e)=>{
+      e.preventDefault()
+
+    }
+
 
     if(loading) return (
         <div className="flex justify-center items-center min-h-screen">
@@ -70,6 +80,44 @@ function Postpage() {
   <div className="max-w-6xl mx-auto w-full dark:text-white">
 <CallAction/>
   </div>
+
+      <div className="max-w-5xl mx-auto w-full p-3">
+        {
+            currentUser ? (
+   <div className="flex items-center gap-1 my-5 text-gray-500 text-sm">
+    <p>Signed in as:</p>
+    <img src={currentUser.profilePicture} className="h-5 w-5 object-cover rounded-full" alt="" />
+    <Link to={"/dashboard?tab=profile"} className="text-xs text-cyan-600 hover:underline">
+        @{currentUser.username}
+    </Link>
+     </div>
+            ):(
+                <div className="text-teal-500 my-5 ">you must be signed in to comment<Link to={"/sign-in"} className="text-sm text-red-400">Sign-in</Link></div>
+            )
+        }
+
+        <div>
+            {currentUser && (
+            <form className="border-2 rounded-md p-4" onSubmit={handleSubmit}>
+                <Textarea type="text" 
+                onChange={(e)=>{
+                    setComments(e.target.value)
+                    
+                }}
+                value={comments}
+                rows="4"
+                maxLength="200"
+                placeholder="add comment"/>
+                <div className="flex items-center justify-between mt-8">
+                    <p className="text-gray-500">{200 - comments.length} characteres remaining</p>
+                    <button className="bg-green-700 text-white py-2 rounded-md px-3" type="submit">Submit</button>
+                </div>
+            </form>
+        )}
+        </div>
+      
+    </div>
+  )
   {error && (<Alert color="failure">{error}</Alert>)}
    </main>
   )

@@ -14,6 +14,7 @@ import PrivateAdmin from "./component/PrivateAdmin"
 import UpdatePost from "./pages/UpdatePost"
 import Postpage from "./pages/Postpage"
 import {useState,useEffect} from "react"
+import Scroll from "./component/Scroll"
 // import { useSelector } from "react-redux"
 
 function App() {
@@ -27,17 +28,17 @@ function App() {
 
   if(!loading){
     return (
-     <div className="absolute h-screen w-screen overflow-x-hidden overflow-y-hidden">
+   
        <div className="bg-white max-w-screen mx-auto flex justify-center items-center h-screen my-auto">
         <img src="/abu-logo.jpg" alt="my-icon image" className="my-image w-72 h-72 object-cover p-6 shadow-2xl"/>
-      </div>
-     </div>
+       </div>
     )
   }
 
 
   return (
    <BrowserRouter>
+   <Scroll/>
    <Header/>
    <Routes>
   <Route path="/" exact element={<Home/>}/>
