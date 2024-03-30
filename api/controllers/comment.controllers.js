@@ -104,7 +104,7 @@ const deleteComment =async (req,res,next)=>{
         }
 
         if(comment.userId !== req.user.id && !req.user.isAdmin){
-            return next(errorHandler(402,"you are not allow to delete this post"))
+            return next(errorHandler(402,"you are not allow to delete this comment"))
         }
 
         const deletCom = await Comment.findByIdAndDelete(req.params.commentId)

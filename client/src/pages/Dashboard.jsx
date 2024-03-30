@@ -4,9 +4,25 @@ import DashSidebar from "../component/DashSidebar"
 import DashProfile from "../component/DashProfile"
 import DashPost from "../component/DashPost"
 import DashUser from "../component/DashUser"
+import { Spinner } from "flowbite-react"
 function Dashboard() {
   const location = useLocation()
   const [tab,setTab] = useState("")
+  const [loading,setLoading] = useState(false)
+
+
+  useEffect(()=>{
+    setTimeout(() => {
+      setLoading(true)
+    }, 4000);
+  },[loading])
+
+
+  if(!loading){
+    <div className="flex justify-center items-center min-h-screen">
+    <Spinner size='xl'/>
+</div>
+  }
 
   useEffect(()=>{
     const urlParams = new URLSearchParams(location.search)

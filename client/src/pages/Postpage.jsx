@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom"
 import CallAction from "../component/CallAction"
 import {useSelector} from "react-redux"
 import CommentSection from "../component/CommentSection"
+import PostCard from "../component/PostCard"
 // import CommentSection from "../component/CommentSection"
 const Postpage=()=> {
 
@@ -12,7 +13,10 @@ const Postpage=()=> {
   const [loading,setLoading] = useState()
   const [error,setError] = useState("")
   const [post,setPost] = useState(null)
+  const [recentPost,setRecentPost] = useState(null)
   const {currentUser} = useSelector((state)=>state.user)
+
+
     useEffect(()=>{
        const fetchPost = async ()=>{
         try {
@@ -42,6 +46,30 @@ const Postpage=()=> {
 
        fetchPost()
     },[postSlug])
+
+
+    useEffect(()=>{
+      try {
+
+        const fetchRecentPosts = async ()=>{
+          const res = await fetch(`api/post/getposts?limit=3`,{
+            method:"GET"
+          })
+
+          const data = await res.json()
+
+      if(res.ok){
+        setRecentPost(data.posts)
+      }
+        }
+
+
+        fetchRecentPosts()
+        
+      } catch (error) {
+        console.log(error.message)
+      }
+    },[])
 
 
     if(loading) return (
@@ -75,8 +103,23 @@ const Postpage=()=> {
 <CallAction/>
   </div>
 
-     
+     <div>
+      
  {post && <CommentSection postId={post._id}/>}
+     </div>
+     
+     <div className=" mt-16 mb-12">
+   <h1 className="text-center text-lg font-medium">Recent articles </h1>
+   <div>
+    {recentPost && recentPost.map((post)=>{
+     return <PostCard key={post._id} post={post}/>
+    })}
+   </div>
+     </div>
+
+
+
+
  {error && (<Alert color="failure">{error}</Alert>)}
   
    </main>
