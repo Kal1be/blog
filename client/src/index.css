@@ -6,7 +6,7 @@
 
 .my-image{
     /* height: 100vh; */
-   animation: kalibe 3s linear infinite;
+   animation: kalibe 2s linear infinite;
    scale:.1;
    transform: rotate(100);
    border-radius: 50%;
@@ -35,7 +35,7 @@ body{
 
     }
     50%{
-        scale:.4;
+        scale:.3;
    transform: rotate(260);
 
        

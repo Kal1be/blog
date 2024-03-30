@@ -94,6 +94,28 @@ const editComment = async (req,res,next)=>{
     }
 }
 
+// the delete component route for comment page
+
+const deleteComment =async (req,res,next)=>{
+    try {
+        const comment = Comment.findById(req.params.commentId)
+        if(!comment){
+            return next(errorHandler(404,"comment not found"))
+        }
+
+        if(comment.userId !== req.user.id && !req.user.isAdmin){
+            return next(errorHandler(402,"you are not allow to delete this post"))
+        }
+
+        const deletCom = await Comment.findByIdAndDelete(req.params.commentId)
+
+        res.status(200).json(deletCom)
+        
+    } catch (error) {
+        next(error)
+    }
+}
 
 
-module.exports = {createComment,getPostComments,likeComment,editComment}
+
+module.exports = {createComment,getPostComments,likeComment,editComment,deleteComment}

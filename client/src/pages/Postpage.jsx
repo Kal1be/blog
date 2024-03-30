@@ -35,7 +35,7 @@ const Postpage=()=> {
 
         } 
         catch (error) {
-            setError(error.message)
+            console.log(error.message)
             setLoading(false)
         }
        }

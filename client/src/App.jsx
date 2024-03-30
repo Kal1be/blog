@@ -23,13 +23,13 @@ function App() {
   useEffect(()=>{
     setTimeout(() => {
       setLoading(true)
-    }, 8000);
+    }, 6000);
   },[loading])
 
   if(!loading){
     return (
    
-       <div className="bg-white max-w-screen mx-auto flex justify-center items-center h-screen my-auto">
+       <div className="bg-white max-h-screen mx-auto flex justify-center items-center h-screen my-auto">
         <img src="/abu-logo.jpg" alt="my-icon image" className="my-image w-72 h-72 object-cover p-6 shadow-2xl"/>
        </div>
     )

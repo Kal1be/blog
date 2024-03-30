@@ -7,7 +7,7 @@ import { Textarea } from 'flowbite-react';
 
 
 
- function Comment({comment,onLike,onEdit}) {
+ function Comment({comment,onLike,onEdit,onDelete}) {
   // const [comments,setComments] = useState([])
   const {currentUser} = useSelector((state)=>state.user)
   const [isEditing,setIsEditing] = useState(false)
@@ -54,8 +54,10 @@ const handleSave = async ()=>{
     })
 
     const data = await res.json()
+
     if(res.ok){
       setIsEditing(false)
+      console.log(data)
       onEdit(comment._id,editComment)
     }
     
@@ -94,15 +96,18 @@ const handleSave = async ()=>{
         ): 
       (  <>
          <p>{comment.content}</p>
-      <div className='flex gap-1 pt-2  items-center'>
-          <button type='button' className={`hover:text-blue-500 text-gray-400 text-sm ${currentUser && comment.likes.includes(currentUser._id) && "!text-blue-500"}  `} 
+      <div className='flex gap-6 pt-2  items-center'>
+          <button type='button' className={`hover:text-blue-500 flex items-center gap-1 text-gray-400 text-sm ${currentUser && comment.likes.includes(currentUser._id) && "!text-blue-500"}  `} 
           onClick={()=>{onLike(comment._id)}}>
             <FaThumbsUp/>
-          </button>
           <p>{comment.numberOfLikes > 0 && comment.numberOfLikes + " " +(comment.numberOfLikes===1 ? "like":"likes") }</p>
+          </button>
           {
             currentUser && (currentUser.id === comment.userId || currentUser.isAdmin) && (
+             <>
               <button onClick={handleEdit} className='hover:text-blue-500 text-gray-400'>Edit</button>
+              <button onClick={()=>onDelete(comment._id)} className='text-red-400'>Delete</button>
+             </>
             )
           }
          </div>
@@ -120,6 +125,7 @@ const handleSave = async ()=>{
 Comment.propTypes = {
   onLike:PropTypes.func.isRequired,
   onEdit:PropTypes.func.isRequired,
+  onDelete:PropTypes.func.isRequired,
     comment: PropTypes.object.isRequired, // Example of prop validation
   };
 
