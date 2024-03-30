@@ -136,4 +136,19 @@ const getUsers = async (req,res,next)=>{
 
 }
 
-module.exports = { getUser,updateUser,deleteUser,signOut,getUsers}
+
+// the get only one user
+const getUserinfo = async (req,res,next)=>{
+try {
+    const user = await User.findById(re.params.userId)
+    if(!user){
+        return next(errorHandler(404,"user not found"))
+    }
+    const {password,...rest} = user._doc
+    res.status(200).json(rest)
+} catch (error) {
+    next(error)
+}
+
+}
+module.exports = { getUser,updateUser,deleteUser,signOut,getUsers,getUserinfo}

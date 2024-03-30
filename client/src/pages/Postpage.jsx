@@ -6,15 +6,19 @@ import CallAction from "../component/CallAction"
 import {useSelector} from "react-redux"
 // import CommentSection from "../component/CommentSection"
 import {Textarea } from "flowbite-react"
+import Comment from "../component/Comment"
 
 const Postpage=()=> {
-  const [comments,setComments] = useState(" ")
+  const [comments,setComments] = useState([])
+
+  const [comment,setComment] = useState([])
+
     const {postSlug} = useParams()
   const [loading,setLoading] = useState()
   const [error,setError] = useState(false)
   const [post,setPost] = useState(null)
   const {currentUser} = useSelector((state)=>state.user)
-  // console.log(post._id)''
+  console.log(comment)
     useEffect(()=>{
        const fetchPost = async ()=>{
         try {
@@ -66,6 +70,7 @@ const Postpage=()=> {
   
         if(res.ok){
           setComments("")
+          console.log(data)
           setError(null)
         }
         
@@ -74,6 +79,21 @@ const Postpage=()=> {
       }
 
     }
+
+    useEffect(()=>{
+
+  const getComments = async() =>{
+    const res = await fetch(`/api/comment/getpostcomments/${post._id}`)
+    const data = await res.json()
+    if(res.ok){
+      setComment(data)
+    }
+
+  }
+
+  getComments()
+
+    },[post && post._id])
 
 
     if(loading) return (
@@ -143,6 +163,23 @@ const Postpage=()=> {
         </div>
       
     </div>
+  <div className="max-w-4xl mx-auto w-full">
+  {comment.length ===0 ?(<p className="text-sm my-5">No comments yet !</p>):(
+     <>
+      <div className="text-sm my-5 flex items-center gap-1">
+        <p>Comments</p>
+        <div className="border border-gray-400 px-2 ">
+          <p>{comment.length}</p>
+        </div>
+        {comment.map((com)=>{
+          return(
+            <Comment key={com.key} comm={com}/>
+          )
+        })}
+      </div>
+     </>
+    )}
+  </div>
   
   {error && (<Alert color="failure">{error}</Alert>)}
    </main>
