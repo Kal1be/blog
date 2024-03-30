@@ -95,6 +95,22 @@ console.log(comment)
   
       }
 
+
+      const handleEdit = async (comment,editComment)=>{
+
+        setComments((prevComments) =>
+        prevComments.map((c) =>
+          c._id === comment._id
+            ? {
+                ...c,
+                content:editComment
+              }
+            : c
+        )
+      );
+
+      }
+
   
   return (
 
@@ -154,7 +170,7 @@ console.log(comment)
       <div>
        {comments.map((com)=>{
           return(
-           com._id && <Comment key={com._id} comment={com} onLike={handleLike}/>
+           com._id && <Comment key={com._id} comment={com} onLike={handleLike} onEdit={handleEdit}/>
           )
         })}
        </div>

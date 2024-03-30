@@ -10,7 +10,7 @@ const Postpage=()=> {
 
     const {postSlug} = useParams()
   const [loading,setLoading] = useState()
-  const [error,setError] = useState(false)
+  const [error,setError] = useState("")
   const [post,setPost] = useState(null)
   const {currentUser} = useSelector((state)=>state.user)
     useEffect(()=>{
@@ -21,21 +21,21 @@ const Postpage=()=> {
             const data = await res.json()
 
             if(!res.ok){
-                setError(true)
+                setError("")
                 setLoading(false)
                 return
             }
             if(res.ok){
                 setPost(data.posts[0])
                 setLoading(false)
-                setError(false)
+                setError("")
   console.log(currentUser._id,post._id)
 
             }
 
         } 
         catch (error) {
-            setError(true)
+            setError(error.message)
             setLoading(false)
         }
        }
@@ -77,7 +77,7 @@ const Postpage=()=> {
 
      
  {post && <CommentSection postId={post._id}/>}
- {error && <Alert color="failure">{error}</Alert>}
+ {error && (<Alert color="failure">{error}</Alert>)}
   
    </main>
   )
