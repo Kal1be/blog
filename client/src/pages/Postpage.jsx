@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom"
 import CallAction from "../component/CallAction"
 import {useSelector} from "react-redux"
 // import CommentSection from "../component/CommentSection"
-import {  Textarea } from "flowbite-react"
+import {Textarea } from "flowbite-react"
 
 const Postpage=()=> {
   const [comments,setComments] = useState(" ")
@@ -14,7 +14,7 @@ const Postpage=()=> {
   const [error,setError] = useState(false)
   const [post,setPost] = useState(null)
   const {currentUser} = useSelector((state)=>state.user)
-  // console.log(post._id)
+  // console.log(post._id)''
     useEffect(()=>{
        const fetchPost = async ()=>{
         try {
@@ -31,6 +31,8 @@ const Postpage=()=> {
                 setPost(data.posts[0])
                 setLoading(false)
                 setError(false)
+  console.log(currentUser._id,post._id)
+
             }
 
         } 
@@ -46,6 +48,30 @@ const Postpage=()=> {
 
     const handleSubmit = async (e)=>{
       e.preventDefault()
+      if(comments.length > 200){
+        return 
+      }
+
+      try {
+        const res = await fetch("/api/comment/create",{
+          method:"POST",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body:JSON.stringify({content:comments,postId:post._id,userId:currentUser._id})
+        })
+  
+        
+        const data = await res.json()
+  
+        if(res.ok){
+          setComments("")
+          setError(null)
+        }
+        
+      } catch (error) {
+       setError(error.message)
+      }
 
     }
 
@@ -117,7 +143,7 @@ const Postpage=()=> {
         </div>
       
     </div>
-  )
+  
   {error && (<Alert color="failure">{error}</Alert>)}
    </main>
   )
