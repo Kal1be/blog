@@ -140,7 +140,7 @@ const getUsers = async (req,res,next)=>{
 // the get only one user
 const getUserinfo = async (req,res,next)=>{
 try {
-    const limit = parseInt(req.query.limit) || 9
+    // const limit = parseInt(req.query.limit) || 9
     const user = await User.findById(req.params.userId)
     if(!user){
         return next(errorHandler(404,"user not found"))
