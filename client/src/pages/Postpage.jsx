@@ -70,7 +70,7 @@ const Postpage=()=> {
   
         if(res.ok){
           setComments("")
-          console.log(data)
+          setComment([data,...comment])
           setError(null)
         }
         
@@ -171,12 +171,15 @@ const Postpage=()=> {
         <div className="border border-gray-400 px-2 ">
           <p>{comment.length}</p>
         </div>
-        {comment.map((com)=>{
+      
+      </div>
+      <div>
+       {comment.map((com)=>{
           return(
-            <Comment key={com.key} comm={com}/>
+            <Comment key={com._id} comment={com}/>
           )
         })}
-      </div>
+       </div>
      </>
     )}
   </div>

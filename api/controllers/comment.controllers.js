@@ -31,6 +31,7 @@ const createComment = async (req,res,next)=>{
 
 const getPostComments =async (req,res,next)=>{
     try {
+        const limit = parseInt(req.query.limit) || 6
         const comments = await Comment.find({postId:req.params.postId}).sort({createdAt:-1})
 
         res.status(200).json(comments)

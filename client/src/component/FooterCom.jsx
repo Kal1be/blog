@@ -18,7 +18,10 @@ function FooterCom() {
 
    <img src="/abuimage.png" alt="" className=" h-12" />
     </Link>
-   <p className=" dark:text-white text-gray-800">Lorem ipsum dolor, ullam tempore ipsam facere. Architecto eius amet adipisci nam pariatur commodi ad similique quis, illo dolorum illum soluta officiis ex numquam magnam inventore aliquam impedit ea eaque provident maxime hic nisi. Doloremque repellat praesentium amet eveniet.</p>
+   <p className=" dark:text-white text-gray-800">Ahmadu Bello University is Government University locate in Kaduna State.Senate Building,
+Ahmadu Bello University,
+Samaru Campus, Zaria,
+Kaduna State, Nigeria.</p>
         </div> 
        <div className="md:flex  flex-1 w-full justify-around gap-8">
        <div className="grid-cols-2 mt-3  gap-3 sm:mt-4 sm:grid-cols-3 sm:gap-6">
