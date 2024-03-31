@@ -71,7 +71,7 @@ Kaduna State, Nigeria.</p>
 <div className="md:flex justify-between  text-xs dark:text-white text-slate-600 w-full font-medium"> 
     <h2 className="mt-2">Copyright Distance Learning Center</h2>
     <h2 className="flex mt-2 gap-1 items-center">
-      <Footer.Copyright by="DevSoftware Yahoulbo" year={new Date().getFullYear()} className="dark:text-white text-slate-600 text-xs font-medium"/> <span></span>
+      <Footer.Copyright by="Yahoulbo DevSoftware" year={new Date().getFullYear()} className="dark:text-white text-slate-600 text-xs font-medium"/> <span></span>
     </h2>
 </div>
     </Footer>

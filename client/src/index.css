@@ -4,6 +4,13 @@
 @tailwind utilities;
 
 
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 .my-image{
     /* height: 100vh; */
    animation: kalibe 2s linear infinite;
@@ -11,14 +18,9 @@
    transform: rotate(100);
    border-radius: 50%;
    transform: rotate(360%);
+   overflow: hidden;
    
 }
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
 body{
   height: 100vh;
      

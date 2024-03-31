@@ -81,7 +81,7 @@ if(currentUser.isAdmin){
 
   return (
 
-    <div className="p-3 overflow-y-scroll h-[700px] w-full   md:mx-auto">
+    <div className="p-3 w-full   md:mx-auto">
       <div className="md:flex md:flex-wrap gap-4 justify-center">
       <div  className="flex flex-col p-3 md:w-72 my-3  dark:bg-slate-800 md:h-32  rounded-md shadow-md">
           <div className="flex justify-between">

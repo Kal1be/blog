@@ -15,6 +15,7 @@ import UpdatePost from "./pages/UpdatePost"
 import Postpage from "./pages/Postpage"
 import {useState,useEffect} from "react"
 import Scroll from "./component/Scroll"
+import Search from "./pages/Search"
 // import { useSelector } from "react-redux"
 
 function App() {
@@ -29,12 +30,15 @@ function App() {
   if(!loading){
     return (
    
-       <div className="bg-white max-h-screen mx-auto flex justify-center items-center h-screen my-auto">
-        <img src="/abu-logo.jpg" alt="my-icon image" className="my-image w-72 h-72 object-cover p-6 shadow-2xl"/>
+       <div className="bg-white  flex justify-center items-center h-[100vh] p-0 !m-0 overflow-y-hidden">
+     <div>
+     <img src="/abu-logo.jpg" alt="my-icon image" className="my-image w-72 h-72 object-cover p-6 shadow-2xl"/>
+        <span className="text-center px-[53px] -mt-24 absolute">Distance Learning Center</span>
+     </div>
        </div>
     )
   }
-
+ 
 
   return (
    <BrowserRouter>
@@ -44,6 +48,7 @@ function App() {
   <Route path="/" exact element={<Home/>}/>
   <Route path="/about" element={<About/>}/>
    <Route path="/sign-in" element={<Sign/>}/>
+   <Route path="/search" element={<Search/>}/>
    <Route path="/signup" element={<Signup/>}/>
    <Route element={<PrivateRoute/>}>
    <Route path="/dashboard"  element={<Dashboard/>}/>

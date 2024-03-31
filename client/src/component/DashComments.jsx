@@ -21,7 +21,7 @@ const handleShowMore = async ()=>{
     const res = await fetch(`/api/comment/getcomments?startIndex=${startIndex}`)
     const data = await res.json()
     if(res.ok){
-      setComments((prev)=>[...prev,...data.users])
+      setComments((prev)=>[...prev,...data.comments])
       if(data.comments.length < 9){
         setShowMore(false)
       }
@@ -91,7 +91,7 @@ catch (error) {
 
 }
 
-  return <div className="table-auto w-full h-[800px] overflow-y-scroll overflow-x-scroll
+  return <div className="table-auto
    md:mx-auto p-3 scrollbar scrollbar-track-slate-100
     scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-500 dark:scrollbar-track-slate-700">
     {currentUser.isAdmin && comments.length > 0 ? (

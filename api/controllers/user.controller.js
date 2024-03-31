@@ -143,7 +143,7 @@ try {
     // const limit = parseInt(req.query.limit) || 9
     const user = await User.findById(req.params.userId)
     if(!user){
-        return next(errorHandler(404,"user not found"))
+        return next(errorHandler(404,"user not found "))
     }
     const {password,...rest} = user._doc
     res.status(200).json(rest)
