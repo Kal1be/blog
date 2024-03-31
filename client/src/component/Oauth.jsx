@@ -17,10 +17,10 @@ const handleGoogleClick = async ()=>{
     try {
 
       const responseSignup = await signInWithPopup(auth,provider)
-      console.log(responseSignup)
+    
       const  res = await fetch("/api/auth/google",{
         method:"POST",
-        headers:{"content-Type":"application/json"},
+        headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
           name:responseSignup.user.displayName,
           email:responseSignup.user.email,
@@ -29,7 +29,7 @@ const handleGoogleClick = async ()=>{
       })
 
       const data = await res.json()
-
+      console.log(data)
       if(res.ok){
         dispatch(signInSuccess(data))
         navigate("/dashboard")

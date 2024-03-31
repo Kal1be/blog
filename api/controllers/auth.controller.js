@@ -73,7 +73,6 @@ try {
 
 const google =async (req,res,next)=>{
     const {name,email,googlePhotoUrl} = req.body
-
     try {
         
         const user = await User.findOne({email})
@@ -83,10 +82,10 @@ const google =async (req,res,next)=>{
             const {password,...rest} = user._doc
             res.status(200).cookie("access_token",token,{httpOnly:true}).json(rest)
         }
+
         else{
             const generatedPassword = Math.random().toString(36).slice(-8)
-
-            const hashPassword = bcrypt.hash(generatedPassword,10)
+            const hashPassword =await bcrypt.hash(generatedPassword,10)
 
             const newUser = new User({
                 username:name.toLowerCase().split(" ").join(""),
@@ -100,6 +99,7 @@ const google =async (req,res,next)=>{
             const {password,...rest} = user._doc
             res.status(200).cookie("access_token",token,{httpOnly:true}).json(rest)
         }
+
     } catch (error) {
        return next(error)
     }

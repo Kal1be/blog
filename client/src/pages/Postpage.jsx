@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { Alert, Button, Spinner } from "flowbite-react"
 import { Link, useParams } from "react-router-dom"
 import CallAction from "../component/CallAction"
-import {useSelector} from "react-redux"
+// import {useSelector} from "react-redux"
 import CommentSection from "../component/CommentSection"
 import PostCard from "../component/PostCard"
 // import CommentSection from "../component/CommentSection"
@@ -14,7 +14,7 @@ const Postpage=()=> {
   const [error,setError] = useState("")
   const [post,setPost] = useState(null)
   const [recentPost,setRecentPost] = useState(null)
-  const {currentUser} = useSelector((state)=>state.user)
+  // const {currentUser} = useSelector((state)=>state.user)
 
 
     useEffect(()=>{
@@ -33,7 +33,6 @@ const Postpage=()=> {
                 setPost(data.posts[0])
                 setLoading(false)
                 setError("")
-  console.log(currentUser._id,post._id)
 
             }
 
@@ -52,13 +51,12 @@ const Postpage=()=> {
       try {
 
         const fetchRecentPosts = async ()=>{
-          const res = await fetch(`api/post/getposts?limit=3`,{
-            method:"GET"
-          })
+          const res = await fetch(`/api/post/getposts?limit=3`)
 
           const data = await res.json()
 
       if(res.ok){
+        console.log(recentPost)
         setRecentPost(data.posts)
       }
         }
@@ -69,7 +67,7 @@ const Postpage=()=> {
       } catch (error) {
         console.log(error.message)
       }
-    },[])
+    },[recentPost])
 
 
     if(loading) return (
@@ -79,13 +77,13 @@ const Postpage=()=> {
     )
   return (
    <main className="p-3 flex flex-col max-w-6xl mx-auto min-h-screen"> 
-<h2 className="text-xl mt-8">{currentUser.isAdmin && (
+{/* <h2 className="text-xl mt-8">{currentUser.isAdmin && (
   <div className="flex gap-2 items-center">
     <img src={currentUser.profilePicture} className="rounded-full w-12 h-12" alt="" />
     <p className="font-bold">{currentUser.username}</p>
   </div>
-)}</h2>
-<h1 className="text-center  text-3xl font-serif  lg:text-4xl mt-8 py-2">{post && post.title}</h1>
+)}</h2> */}
+<h1 className="text-center  text-3xl font-serif  lg:text-4xl mt-12 py-2">{post && post.title}</h1>
 <Link to={`/search?category=${post && post.category}`} className="self-center mt-5">
 <Button color="gray" pill size='xl'>{post && post.category}</Button>
 </Link>
@@ -108,12 +106,12 @@ const Postpage=()=> {
  {post && <CommentSection postId={post._id}/>}
      </div>
      
-     <div className=" mt-16 mb-12">
+     <div className="flex-col mt-16 mb-12">
    <h1 className="text-center text-lg font-medium">Recent articles </h1>
-   <div>
-    {recentPost && recentPost.map((post)=>{
-     return <PostCard key={post._id} post={post}/>
-    })}
+   <div className="md:flex gap-5 justify-center w-full  mt-10">
+    {recentPost && recentPost.map((post)=>(
+       <PostCard key={post._id} post={post}/>
+  ))}
    </div>
      </div>
 

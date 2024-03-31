@@ -240,7 +240,7 @@ setCommentToDelete(commentId)
 
 
 CommentSection.propTypes = {
-    postId: PropTypes.element.isRequired, // Example of prop validation
+    postId: PropTypes.string.isRequired, // Example of prop validation
   };
 
 

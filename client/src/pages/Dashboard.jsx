@@ -5,6 +5,7 @@ import DashProfile from "../component/DashProfile"
 import DashPost from "../component/DashPost"
 import DashUser from "../component/DashUser"
 import { Spinner } from "flowbite-react"
+import DashComments from "../component/DashComments"
 function Dashboard() {
   const location = useLocation()
   const [tab,setTab] = useState("")
@@ -51,7 +52,10 @@ function Dashboard() {
       {
         tab==="users" && <DashUser/>
       }
+
+      {/* the comments tab */}
       
+      {tab==="comments" && <DashComments/>}
     </div>
   )
 }

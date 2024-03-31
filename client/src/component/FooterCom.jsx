@@ -25,7 +25,7 @@ Kaduna State, Nigeria.</p>
         </div> 
        <div className="md:flex  flex-1 w-full justify-around gap-8">
        <div className="grid-cols-2 mt-3  gap-3 sm:mt-4 sm:grid-cols-3 sm:gap-6">
-           <h2> <Footer.Title title="About Distance Learning"/></h2>
+            <Footer.Title title="About Distance Learning"/>
             <Footer.LinkGroup col>
            <Footer.Link href="kal1be.github.io/yahoulbo-portfolio" rel="noopener nonreferrer" className="" target="_blank">
            Our Students</Footer.Link> 
