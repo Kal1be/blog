@@ -21,6 +21,10 @@
    overflow: hidden;
    
 }
+
+.my-p{
+    line-height: 2.3rem;
+}
 body{
   height: 100vh;
      
